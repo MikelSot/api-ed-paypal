@@ -1,0 +1,46 @@
+version: "3.7"
+services:
+  db_ed_shop_paypal:
+    image: postgres:12.8-alpine
+    container_name: "ed_shop_paypal-db"
+    environment:
+      - POSTGRES_DB=ed_shop_paypal
+      - POSTGRES_USER=mikel
+      - POSTGRES_PASSWORD=123456
+    volumes:
+      - data_ed_shop_paypal:/var/lib/postgresql/data
+    ports:
+      - "7000:5432"
+    networks:
+      - service_ed_shop_paypal
+  api_ed_paypal:
+    build:
+      context: .
+      dockerfile: api.Dockerfile
+    image: api-ed-paypal:1.0
+    container_name: "api-ed-paypal"
+    ports:
+      - "9000:8080"
+    networks:
+      - service_ed_shop_paypal
+    volumes:
+      - .:/go/src/api-ed-paypal
+volumes:
+  data_ed_shop_paypal:
+    name: data_ed_shop_with_paypal
+    driver: local
+
+networks:
+  service_ed_shop_paypal:
+    name: service_ed_shop_with_paypal
+    driver: bridge
+
+
+
+
+
+
+
+
+
+
