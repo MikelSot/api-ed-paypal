@@ -13,23 +13,23 @@ func New(s Storage) Invoice {
 	return Invoice{storage: s}
 }
 
-func (uc Invoice) Create(order *model.Order, subscriptionID uint) error {
+func (ic Invoice) Create(m *model.Order, subscriptionID uint) error {
 	i := model.Invoice{}
 
-	if order.IsSubscription {
+	if m.IsSubscription {
 		i.SubscriptionID = subscriptionID
 	}
 
-	i.Email = order.Email
+	i.Email = m.Email
 	i.InvoiceDate = time.Now()
-	i.IsProduct = order.IsProduct
-	i.IsSubscription = order.IsSubscription
-	i.Price = order.Price
-	i.ProductID = order.ProductID
+	i.IsProduct = m.IsProduct
+	i.IsSubscription = m.IsSubscription
+	i.Price = m.Price
+	i.ProductID = m.ProductID
 
-	return uc.storage.Create(&i)
+	return ic.storage.Create(&i)
 }
 
-func (uc Invoice) ByEmail(email string) (model.Invoices, error) {
-	return uc.storage.ByEmail(email)
+func (ic Invoice) ByEmail(email string) (model.Invoices, error) {
+	return ic.storage.ByEmail(email)
 }

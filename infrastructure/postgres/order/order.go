@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	queryInsert = "INSERT INTO orders (email, is_product, is_subscription, product_id, type_subs, price) VALUES ($1, $2, $3, $4, $5, $6, $7)"
+	queryInsert = "INSERT INTO orders (email, is_product, is_subscription, product_id, type_subs, price) VALUES ($1, $2, $3, $4, $5, $6)"
 	queryByID   = "SELECT id, email, is_product, is_subscription, product_id, type_subs, price, created_at, updated_at FROM orders WHERE id = $1"
 )
 

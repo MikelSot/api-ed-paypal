@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	queryInsert  = "INSERT INTO invoices (invoice_date, email, is_product, is_subscription, product_id, subscription_id, price) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)"
+	queryInsert  = "INSERT INTO invoices (invoice_date, email, is_product, is_subscription, product_id, subscription_id, price) VALUES ($1, $2, $3, $4, $5, $6, $7)"
 	querySelect  = "SELECT id, invoice_date, email, is_product, is_subscription, product_id, subscription_id, price, created_at, updated_at FROM invoices"
 	queryByID    = querySelect + " WHERE id = $1"
 	queryByEmail = querySelect + " WHERE email = $1"
@@ -121,7 +121,7 @@ func (i Invoice) scan(row postgres.RowScanner) (model.Invoice, error) {
 	if err != nil {
 		return model.Invoice{}, err
 	}
-	
+
 	invoice.UpdatedAt = updatedAtNull.Time
 
 	return invoice, nil
