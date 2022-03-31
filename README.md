@@ -8,25 +8,36 @@ del cliente y de otras interacciones.
 
 ![](.img/hexagonal.png)
 
-Extructura del proyecto
+- **Infraestructura**: son los elementos externos con los que se comunica la aplicación, tanto de entrada como de salida.
+    Puntos de entrada son una API con REST o GraphQL, mensajería con RabbitMQ o mediante línea de comandos.
+    Puntos de salida son una base de datos relacional con PostgreSQL, no relacional con MongoDB, o también envío de mensajes con RabbitMQ. A los puntos de entrada se les denomina puertos y a los puntos de salida adaptadores.
+  
+  - **Puertos**: una aplicación puede ofrecer diferentes formas de comunicación al mismo tiempo, ya sea con una API REST o GraphQL, mensajes o mediante línea de comandos.
+  - **Adaptadores**: igualmente una aplicación puede utilizar diferentes bases de datos o sistemas de comunicación con el exterior.
+- **Aplicación**: son los servicios que definen la API pública del dominio e independiza al dominio de cualesquiera 
+              elementos de infraestructura actuales o en el futuro.
+- **Dominio**: contiene la lógica de negocio de la aplicación. Esta puede ser implementada usando los principios de DDD.
+
+
+`Extructura del proyecto`
 
 ```bash
 ├── cmd
 ├── domain
-│   └── interface_storage.go
-│   └── interface_usecase.go
-│   └── usecase.go
+│   └── invoice
+│       └── invoice.go
+│       └── usecase.go
 │
 ├── infrastructure
 │   ├── handler
 │   │   ├── request
 │   │   ├── response
-│   │   ├── paypal
+│   │   ├── invoice
 │   │       ├── handler.go
 │   │       └── route.go
 │   └── postgres
-│       └── userrole
-│           └── userrole.go
+│       └── invoice
+│           └── invoice.go
 ├── model
-    └── product.go
+    └── invoice.go
 ```
